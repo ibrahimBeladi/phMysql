@@ -1430,7 +1430,15 @@ class MySQLQuery{
                                 $createdOnColObj = null;
                             }
                             else{
-                                $vals .= $cleanedVal.$comma;
+                                if(is_array($cleanedVal)){
+                                    $cleanedVal = str_replace("','", ",", implode(',', $cleanedVal));
+                                    if($cleanedVal == ''){
+                                        $cleanedVal = "''";
+                                    }
+                                    $vals .= $cleanedVal.$comma;
+                                } else {
+                                    $vals .= $cleanedVal.$comma;
+                                }
                             }
                         }
                     }
